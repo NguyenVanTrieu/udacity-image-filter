@@ -30,7 +30,17 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   /**************************************************************************** */
 
   //! END @TODO1
-  
+  app.get("/filteredimage", async (req, res) => {
+    const imageUrl = req.query.image_url;
+
+    if (!imageUrl || !imageUrl.match(/\.(jpeg|jpg|gif|png)$/)) {
+      res.status(422).send("image_url is not valid");
+    } else {
+      const tempImage = await filterImageFromURL(imageUrl);
+      res.sendFile(tempImage, () => deleteLocalFiles([tempImage]));
+    }
+  });
+
   // Root Endpoint
   // Displays a simple message to the user
   app.get( "/", async ( req, res ) => {
