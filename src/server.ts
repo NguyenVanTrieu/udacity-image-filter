@@ -30,7 +30,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   /**************************************************************************** */
 
   //! END @TODO1
-  app.get("/filteredimage", async (req, res) => {
+  app.get("/filteredimage", async (req:express.Request, res:express.Response)  => {
     const imageUrl = req.query.image_url;
 
     if (!imageUrl || !imageUrl.match(/\.(jpeg|jpg|gif|png)$/)) {
